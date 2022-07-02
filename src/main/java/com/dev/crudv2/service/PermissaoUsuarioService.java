@@ -22,6 +22,7 @@ public class PermissaoUsuarioService {
         return permissaoUsuarioRepository.existsById(id);
     }
     
+    
     public PermissaoUsuario findById(Long id) {
     	PermissaoUsuario permissaoUsuario = permissaoUsuarioRepository.findById(id).orElse(null);
         return permissaoUsuario;

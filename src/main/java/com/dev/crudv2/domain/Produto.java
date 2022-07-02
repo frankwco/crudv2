@@ -22,25 +22,21 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import io.swagger.v3.oas.annotations.media.Schema;
  
 @Entity
-@Table(name = "permissao_usuario")
+@Table(name = "produto")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Getter
 @Setter
-public class PermissaoUsuario implements Serializable {
+public class Produto implements Serializable {
  
     private static final long serialVersionUID = 1L;
  
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-      
+    
+    private String descricao;
+    private Double valorCusto;
+    private Double valorVenda;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCadastro = new Date();
-   
-    @ManyToOne
-    private Usuario usuario;
-    
-    @ManyToOne
-    private Permissao permissao;   
-    
 }

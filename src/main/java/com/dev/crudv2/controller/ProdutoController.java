@@ -17,46 +17,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dev.crudv2.domain.Usuario;
+import com.dev.crudv2.domain.Produto;
 
-import com.dev.crudv2.service.UsuarioService;
+import com.dev.crudv2.service.ProdutoService;
 
 @RestController
-@RequestMapping("/api/usuario")
-public class UsuarioController {
+@RequestMapping("/api/produto")
+public class ProdutoController {
 
 	@Autowired
-	private UsuarioService usuarioService;
+	private ProdutoService produtoService;
 
 	@GetMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Page<Usuario>> findAll(Pageable pageable) {
-		return ResponseEntity.ok(usuarioService.findAll(pageable));
+	public ResponseEntity<Page<Produto>> findAll(Pageable pageable) {
+		return ResponseEntity.ok(produtoService.findAll(pageable));
 	}
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Usuario> findById(@PathVariable long id) {
-		Usuario usuario = usuarioService.findById(id);
-		return ResponseEntity.ok(usuario);
+	public ResponseEntity<Produto> findById(@PathVariable long id) {
+		Produto produto = produtoService.findById(id);
+		return ResponseEntity.ok(produto);
 	}
 
 	@PostMapping(value = "/")
-	public ResponseEntity<Usuario> add(@RequestBody Usuario usuario) 
+	public ResponseEntity<Produto> add(@RequestBody Produto produto) 
 			throws URISyntaxException {
-		Usuario usuarioNovo = usuarioService.save(usuario);
-		return ResponseEntity.created(new URI("/api/usuario/" + 
+		Produto usuarioNovo = produtoService.save(produto);
+		return ResponseEntity.created(new URI("/api/produto/" + 
 				usuarioNovo.getId())).body(usuarioNovo);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Usuario> update(@Valid @RequestBody Usuario usuario, @PathVariable long id) {
-		usuario.setId(id);
-		usuarioService.update(usuario);
+	public ResponseEntity<Produto> update(@Valid @RequestBody Produto produto, @PathVariable long id) {
+		produto.setId(id);
+		produtoService.update(produto);
 		return ResponseEntity.ok().build();
 	}
 
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<Void> deleteById(@PathVariable long id) {
-		usuarioService.deleteById(id);
+		produtoService.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
 }
