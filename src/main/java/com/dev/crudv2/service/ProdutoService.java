@@ -69,6 +69,23 @@ public class ProdutoService {
 		
 		produtoRepository.save(produto);
 	}
+	
+	
+	/**aumento: tipoOperador +, desconto: tipoOperador -**/
+	public void atualizarValorProdutoCategoria(Long idCategoria, 
+			Double percentual, String tipoOperacao) {
+		List<Produto> produtos = produtoRepository.buscarProdutosCategoria(idCategoria);
+		for(Produto produto:produtos) {
+			if(tipoOperacao.equals("+")) {
+				Double porcentagemAumento = 1+(percentual/100);
+				Double novoValor = produto.getValorVenda()*porcentagemAumento;
+				produto.setValorVenda(novoValor);
+			}else {
+				produto.setValorVenda(produto.getValorVenda()*(1-(percentual/100)));
+			}
+			update(produto);
+		}
+	}
 
 	public void deleteById(Long id) {
 		if (!existsById(id)) {

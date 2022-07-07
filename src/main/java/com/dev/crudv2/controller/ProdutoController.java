@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.crudv2.domain.Produto;
@@ -57,6 +58,16 @@ public class ProdutoController {
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<Void> deleteById(@PathVariable long id) {
 		produtoService.deleteById(id);
+		return ResponseEntity.ok().build();
+	}
+	
+	//https://docs.microfocus.com/OMi/10.62/Content/OMi/ExtGuide/ExtApps/URL_encoding.htm
+	//localhost:8080/api/produto/atualizarValorCategoria?percentual=5&idCategoria=1
+	@GetMapping(path = "/atualizarValorCategoria")
+	public ResponseEntity<Void> atualizarValorProdutoCategoria(@RequestParam Double percentual, 
+			@RequestParam Long idCategoria, @RequestParam String tipoOperacao){
+		System.out.println(tipoOperacao);
+		produtoService.atualizarValorProdutoCategoria(idCategoria, percentual, tipoOperacao);		
 		return ResponseEntity.ok().build();
 	}
 }
