@@ -7,7 +7,7 @@
 		<version>2.7.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.dev.crudv2</groupId>
+	<groupId>com.dev.introducaospring</groupId>
 	<artifactId>crudv2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>crudv2</name>
